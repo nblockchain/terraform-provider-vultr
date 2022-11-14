@@ -19,6 +19,10 @@ func dataSourceVultrInstances() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:     schema.TypeString,
+							Computed: true,
+						},
 						"os": {
 							Type:     schema.TypeString,
 							Computed: true,
@@ -207,6 +211,7 @@ func dataSourceVultrInstancesRead(ctx context.Context, d *schema.ResourceData, m
 				}
 
 				serverList = append(serverList, map[string]interface{}{
+					"id":                  server.ID,
 					"os":                  server.Os,
 					"ram":                 server.RAM,
 					"disk":                server.Disk,
